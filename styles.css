@@ -1,0 +1,516 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 更新主色调 */
+:root {
+    --deep-space-purple: #2A0C4E;
+    --dark-blue-purple: #4A235A;
+    --nebula-glow: rgba(74, 35, 90, 0.3);
+}
+
+body {
+    background: var(--deep-space-purple);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+}
+
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(42, 12, 78, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+}
+
+/* 更新品牌名称渐变 */
+.brand-name {
+    font-size: 24px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #fff, #9B59B6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;  /* 图标和文字之间的间距 */
+}
+
+.nav-link i {
+    font-size: 18px;  /* 调整图标大小 */
+}
+
+.nav-link:hover {
+    color: #9B59B6;  /* 悬停效果 */
+    transform: translateY(-2px);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    color: #fff;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: #7f7fd5;
+    transform: translateY(-2px);
+}
+
+/* 容器样式 */
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    overflow: hidden;
+}
+
+/* 内容包装器 */
+.content-wrapper {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    transform-style: preserve-3d;
+    transform: translateZ(100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: flex-start;
+}
+
+/* 标题容器 */
+.title-container {
+    margin-top: 33vh;
+    text-align: center;
+    width: 100%;
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    z-index: 2;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    z-index: 2;
+    margin-bottom: 0;
+}
+
+/* 标题动画 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 页面标题动画 */
+.page-one .title-container {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.page-one .subtitle {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+.page-two .title-container {
+    opacity: 0;
+    animation: fadeInRight 1s ease-out forwards;
+}
+
+.page-two .subtitle {
+    opacity: 0;
+    animation: fadeInRight 1s ease-out 0.3s forwards;
+}
+
+.page-three .title-container {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.page-three .subtitle {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+/* 当页面进入视图时触发动画 */
+.container.visible .title-container,
+.container.visible .subtitle {
+    animation-play-state: running;
+}
+
+/* 星空背景 - 暂时隐藏 */
+.stars, .stars2, .stars3 {
+    display: none; /* 隐藏所有星空元素 */
+}
+
+.stars::before, .stars2::before, .stars3::before {
+    display: none; /* 隐藏所有星空伪元素 */
+}
+
+/* 移除星空相关的动画 */
+@keyframes rotate {
+    from {
+        transform: none;
+    }
+    to {
+        transform: none;
+    }
+}
+
+/* 更新能量路径颜色 */
+#energyGradient {
+    --gradient-start: #2A0C4E;
+    --gradient-mid: #4A235A;
+    --gradient-end: #9B59B6;
+}
+
+.energy-paths {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: screen;
+}
+
+.energy-path {
+    fill: none;
+    stroke: url(#energyGradient);
+    stroke-width: 0.5;
+    stroke-linecap: round;
+    opacity: 0;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: 
+        flowEnergy 8s linear infinite,
+        fadeInOut 8s ease-in-out infinite;
+}
+
+.energy-path:nth-child(2) {
+    animation: 
+        flowEnergy 8s linear infinite,
+        fadeInOut 8s ease-in-out infinite;
+    animation-delay: -2s, -2s;
+}
+
+.energy-path:nth-child(3) {
+    animation: 
+        flowEnergy 8s linear infinite,
+        fadeInOut 8s ease-in-out infinite;
+    animation-delay: -4s, -4s;
+}
+
+/* 添加淡入淡出动画 */
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    25%, 75% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+}
+
+/* 保持原有的流动动画 */
+@keyframes flowEnergy {
+    0% {
+        stroke-dashoffset: 100;
+    }
+    100% {
+        stroke-dashoffset: -100;
+    }
+}
+
+/* 确保第二页的星空背景固定位置 */
+.page-two .stars,
+.page-two .stars2,
+.page-two .stars3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* 添加磨砂玻璃效果的卡片样式 */
+.glass-card {
+    background: rgba(74, 35, 90, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* 塔罗牌容器 */
+.tarot-container {
+    position: relative;
+    margin-top: 15vh;  /* 调整与标题的距离 */
+    display: flex;
+    align-items: center;
+    gap: 60px;  /* 增加卡牌和文字的间距 */
+    justify-content: center;
+}
+
+/* 修改卡片样式 */
+.tarot-card {
+    width: 240px;
+    height: 420px;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    perspective: 1000px;
+}
+
+/* 卡片正面 */
+.card-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 15px;
+    background: linear-gradient(45deg, rgba(74, 35, 90, 0.9), rgba(155, 89, 182, 0.9));
+    box-shadow: 0 0 30px rgba(155, 89, 182, 0.3);
+}
+
+/* 卡片背面 */
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 15px;
+    background: linear-gradient(45deg, rgba(155, 89, 182, 0.9), rgba(74, 35, 90, 0.9));
+    transform: rotateY(180deg);
+}
+
+/* 翻转效果 */
+.tarot-card.flipped {
+    transform: rotateY(180deg);
+}
+
+/* 内容显示效果 */
+.card-content {
+    width: 320px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease;
+    visibility: hidden;
+    padding: 20px;
+    background: rgba(74, 35, 90, 0.3);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    max-height: 420px;
+}
+
+.tarot-card.flipped ~ .card-content {
+    opacity: 1;
+    transform: translateX(0);
+    visibility: visible;
+}
+
+.card-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.card-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+/* 调整第二页标题容器的位置 */
+.page-two .title-container {
+    margin-top: 33vh; /* 与第一页保持一致的位置 */
+    text-align: center;
+    width: 100%;
+}
+
+/* 可以根据需要调整英文标题的样式 */
+.page-two h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem; /* 稍微增加标题和副标题的间距 */
+    line-height: 1.2; /* 调整行高，使多行标题更协调 */
+    max-width: 80%; /* 控制标题宽度 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-two .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    max-width: 70%; /* 控制副标题宽度 */
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+}
+
+/* 第三页样式 */
+.page-three {
+    position: relative;
+    overflow: hidden;
+}
+
+/* 确保第三页的星空背景固定位置 */
+.page-three .stars,
+.page-three .stars2,
+.page-three .stars3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* 调整第三页标题样式 */
+.page-three .title-container {
+    margin-top: 33vh;
+    text-align: center;
+    width: 100%;
+}
+
+.page-three h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-three .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+}
+
+/* 基础动画关键帧 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 第一页标题动画 */
+.page-one .title-container {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.page-one .subtitle {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+/* 第二页标题动画 */
+.page-two .title-container {
+    opacity: 0;
+    animation: fadeInRight 1s ease-out forwards;
+}
+
+.page-two .subtitle {
+    opacity: 0;
+    animation: fadeInRight 1s ease-out 0.3s forwards;
+}
+
+/* 第三页标题动画 */
+.page-three .title-container {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.page-three .subtitle {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+/* 当页面进入视图时触发动画 */
+.container.visible .title-container,
+.container.visible .subtitle {
+    animation-play-state: running;
+} 
