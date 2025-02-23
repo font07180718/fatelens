@@ -39,12 +39,16 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
 .logo-img {
-    height: 40px;
+    height: 40px;  /* 调整 logo 高度 */
     width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);  /* 添加悬停效果 */
 }
 
 /* 更新品牌名称渐变 */
@@ -779,6 +783,11 @@ h1 {
     .title-container .launch-btn {
         margin: 20px auto 0;
         width: auto;
+    }
+
+    /* 移动端适配 */
+    .logo-img {
+        height: 32px;  /* 移动端稍微缩小 logo */
     }
 }
 
