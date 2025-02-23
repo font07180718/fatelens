@@ -515,23 +515,30 @@ h1 {
     animation-play-state: running;
 }
 
-/* 按钮样式 */
+/* 修改按钮样式 */
 .launch-btn {
     margin-top: 30px;
-    padding: 12px 32px;
+    padding: 15px 40px;  /* 增加内边距 */
     font-size: 1.2rem;
     color: #fff;
     background: linear-gradient(45deg, #4A235A, #9B59B6);
     border: none;
-    border-radius: 25px;
+    border-radius: 30px;  /* 增加圆角 */
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 0 20px rgba(155, 89, 182, 0.3);
+    text-transform: none;  /* 防止文字变形 */
+    white-space: nowrap;  /* 防止文字换行 */
+    display: inline-block;  /* 确保按钮大小合适 */
+    min-width: 160px;  /* 设置最小宽度 */
+    font-weight: normal;  /* 设置字重 */
+    letter-spacing: normal;  /* 调整字间距 */
 }
 
 .launch-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 0 30px rgba(155, 89, 182, 0.5);
+    background: linear-gradient(45deg, #5B2C6F, #A569BD);  /* 稍微深一点的渐变 */
 }
 
 /* Toast提示样式 */
@@ -548,42 +555,17 @@ h1 {
     z-index: 100000;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.3s ease;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     border: 2px solid rgba(155, 89, 182, 0.8);
     text-align: center;
     min-width: 300px;
     pointer-events: none;
-    transform-origin: center;
 }
 
 .toast.show {
     opacity: 1;
     visibility: visible;
-    animation: toastIn 0.5s ease forwards,
-               toastOut 0.5s ease forwards 2.5s;
-}
-
-@keyframes toastIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, 20px);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
-
-@keyframes toastOut {
-    from {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-    to {
-        opacity: 0;
-        transform: translate(-50%, -100px);
-    }
 }
 
 /* 第二页布局样式 */
@@ -598,16 +580,18 @@ h1 {
     height: 100vh;
 }
 
+/* 图片容器样式 */
 .image-section {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-right: 60px;
-    perspective: 1000px;
+    padding: 0 60px;
+    perspective: 1500px;
     transform-style: preserve-3d;
 }
 
+/* 第二页图片样式 */
 .title2-img {
     max-width: 100%;
     height: auto;
@@ -616,40 +600,38 @@ h1 {
     animation: fadeInRightWithRotate 1s ease-out forwards;
     transition: transform 0.3s ease;
     box-shadow: -20px 20px 40px rgba(0, 0, 0, 0.3);
+    will-change: transform;
 }
 
-.text-section {
-    flex: 1;
-    text-align: left;
-    padding-left: 60px;
-}
-
-/* 调整第二页标题容器样式 */
-.page-two .title-container {
-    margin-top: 0;
-    text-align: left;
-}
-
-.page-two h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    text-align: left;
-}
-
-.page-two .subtitle {
-    font-size: 1.5rem;
-    opacity: 0.8;
-    text-align: left;
+/* 第三页图片样式 */
+.title3-img {
     max-width: 100%;
+    height: auto;
+    opacity: 0;
+    transform: translateX(30px) perspective(1000px) rotateY(-15deg);
+    animation: fadeInLeftWithRotate 1s ease-out forwards;
+    transition: transform 0.3s ease;
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.3);
+    will-change: transform;
 }
 
-/* 添加鼠标悬停效果 */
+/* 图片悬停效果 */
 .title2-img:hover {
     transform: translateX(0) perspective(1000px) rotateY(10deg);
 }
 
-/* 修改动画关键帧 */
+.title3-img:hover {
+    transform: translateX(0) perspective(1000px) rotateY(-10deg);
+}
+
+/* 文字部分样式 */
+.text-section {
+    flex: 1;
+    text-align: left;
+    padding: 0 60px;
+}
+
+/* 动画关键帧 */
 @keyframes fadeInRightWithRotate {
     from {
         opacity: 0;
@@ -661,25 +643,6 @@ h1 {
     }
 }
 
-/* 第三页布局样式 */
-.split-content.reverse {
-    flex-direction: row-reverse;
-}
-
-.title3-img {
-    max-width: 100%;
-    height: auto;
-    opacity: 0;
-    transform: translateX(30px) perspective(1000px) rotateY(-15deg);
-    animation: fadeInLeftWithRotate 1s ease-out forwards;
-    transition: transform 0.3s ease;
-    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.title3-img:hover {
-    transform: translateX(0) perspective(1000px) rotateY(-10deg);
-}
-
 @keyframes fadeInLeftWithRotate {
     from {
         opacity: 0;
@@ -689,6 +652,11 @@ h1 {
         opacity: 1;
         transform: translateX(0) perspective(1000px) rotateY(-15deg);
     }
+}
+
+/* 第三页布局样式 */
+.split-content.reverse {
+    flex-direction: row-reverse;
 }
 
 /* 调整第三页文字部分样式 */

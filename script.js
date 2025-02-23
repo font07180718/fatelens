@@ -88,21 +88,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const launchBtn = document.querySelector('.launch-btn');
     const toast = document.getElementById('toast');
     
-    // 检查元素是否存在
-    if (!launchBtn) {
-        console.error('Launch button not found!');
-        return;
-    }
-    if (!toast) {
-        console.error('Toast element not found!');
-        return;
-    }
-
     // 添加点击事件
     launchBtn.addEventListener('click', function() {
-        console.log('Button clicked');
+        // 显示 toast
         toast.classList.add('show');
         
+        // 3秒后隐藏
         setTimeout(() => {
             toast.classList.remove('show');
         }, 3000);
