@@ -389,28 +389,24 @@ h1 {
 
 /* 调整第二页标题容器的位置 */
 .page-two .title-container {
-    margin-top: 33vh; /* 与第一页保持一致的位置 */
-    text-align: center;
-    width: 100%;
+    margin-top: 0;
+    text-align: left;
+    max-width: 100%;  /* 确保文字容器占满文字区域 */
 }
 
-/* 可以根据需要调整英文标题的样式 */
 .page-two h1 {
     font-size: 3.5rem;
-    margin-bottom: 1.5rem; /* 稍微增加标题和副标题的间距 */
-    line-height: 1.2; /* 调整行高，使多行标题更协调 */
-    max-width: 80%; /* 控制标题宽度 */
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-align: left;
 }
 
 .page-two .subtitle {
     font-size: 1.5rem;
     opacity: 0.8;
-    max-width: 70%; /* 控制副标题宽度 */
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.4;
+    text-align: left;
+    max-width: 100%;
+    line-height: 1.6;
 }
 
 /* 第三页样式 */
@@ -576,24 +572,33 @@ h1 {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0;  /* 移除整体padding */
     height: 100vh;
 }
 
-/* 图片容器样式 */
+/* 图片部分样式 */
 .image-section {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 60px;
+    padding: 0;  /* 移除padding */
     perspective: 1500px;
     transform-style: preserve-3d;
+    max-width: 50%;  /* 限制最大宽度 */
+}
+
+/* 文字部分样式 */
+.text-section {
+    flex: 1;
+    text-align: left;
+    padding: 0 80px;  /* 增加文字部分的内边距 */
+    max-width: 50%;  /* 限制最大宽度 */
 }
 
 /* 第二页图片样式 */
 .title2-img {
-    max-width: 100%;
+    max-width: 90%;  /* 稍微缩小图片 */
     height: auto;
     opacity: 0;
     transform: translateX(-30px) perspective(1000px) rotateY(15deg);
@@ -622,13 +627,6 @@ h1 {
 
 .title3-img:hover {
     transform: translateX(0) perspective(1000px) rotateY(-10deg);
-}
-
-/* 文字部分样式 */
-.text-section {
-    flex: 1;
-    text-align: left;
-    padding: 0 60px;
 }
 
 /* 动画关键帧 */
