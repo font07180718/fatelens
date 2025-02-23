@@ -513,4 +513,201 @@ h1 {
 .container.visible .title-container,
 .container.visible .subtitle {
     animation-play-state: running;
+}
+
+/* 按钮样式 */
+.launch-btn {
+    margin-top: 30px;
+    padding: 12px 32px;
+    font-size: 1.2rem;
+    color: #fff;
+    background: linear-gradient(45deg, #4A235A, #9B59B6);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(155, 89, 182, 0.3);
+}
+
+.launch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(155, 89, 182, 0.5);
+}
+
+/* Toast提示样式 */
+.toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    color: #fff;
+    padding: 20px 40px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    z-index: 100000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(155, 89, 182, 0.8);
+    text-align: center;
+    min-width: 300px;
+    pointer-events: none;
+    transform-origin: center;
+}
+
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+    animation: toastIn 0.5s ease forwards,
+               toastOut 0.5s ease forwards 2.5s;
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes toastOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -100px);
+    }
+}
+
+/* 第二页布局样式 */
+.split-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 100vh;
+}
+
+.image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 60px;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.title2-img {
+    max-width: 100%;
+    height: auto;
+    opacity: 0;
+    transform: translateX(-30px) perspective(1000px) rotateY(15deg);
+    animation: fadeInRightWithRotate 1s ease-out forwards;
+    transition: transform 0.3s ease;
+    box-shadow: -20px 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.text-section {
+    flex: 1;
+    text-align: left;
+    padding-left: 60px;
+}
+
+/* 调整第二页标题容器样式 */
+.page-two .title-container {
+    margin-top: 0;
+    text-align: left;
+}
+
+.page-two h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.page-two .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    text-align: left;
+    max-width: 100%;
+}
+
+/* 添加鼠标悬停效果 */
+.title2-img:hover {
+    transform: translateX(0) perspective(1000px) rotateY(10deg);
+}
+
+/* 修改动画关键帧 */
+@keyframes fadeInRightWithRotate {
+    from {
+        opacity: 0;
+        transform: translateX(-50px) perspective(1000px) rotateY(25deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) perspective(1000px) rotateY(15deg);
+    }
+}
+
+/* 第三页布局样式 */
+.split-content.reverse {
+    flex-direction: row-reverse;
+}
+
+.title3-img {
+    max-width: 100%;
+    height: auto;
+    opacity: 0;
+    transform: translateX(30px) perspective(1000px) rotateY(-15deg);
+    animation: fadeInLeftWithRotate 1s ease-out forwards;
+    transition: transform 0.3s ease;
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.title3-img:hover {
+    transform: translateX(0) perspective(1000px) rotateY(-10deg);
+}
+
+@keyframes fadeInLeftWithRotate {
+    from {
+        opacity: 0;
+        transform: translateX(50px) perspective(1000px) rotateY(-25deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) perspective(1000px) rotateY(-15deg);
+    }
+}
+
+/* 调整第三页文字部分样式 */
+.page-three .text-section {
+    padding-right: 60px;
+    padding-left: 0;
+}
+
+.page-three .title-container {
+    margin-top: 0;
+    text-align: left;
+}
+
+.page-three h1 {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.page-three .subtitle {
+    text-align: left;
+    max-width: 100%;
 } 

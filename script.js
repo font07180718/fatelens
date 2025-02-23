@@ -84,23 +84,38 @@ createStars();
 
 // 等待 DOM 加载完成
 document.addEventListener('DOMContentLoaded', function() {
-    // 直接在卡片上添加点击事件
-    document.querySelector('.tarot-card').onclick = function() {
-        this.classList.toggle('flipped');
-    };
+    // 获取按钮和 toast 元素
+    const launchBtn = document.querySelector('.launch-btn');
+    const toast = document.getElementById('toast');
+    
+    // 检查元素是否存在
+    if (!launchBtn) {
+        console.error('Launch button not found!');
+        return;
+    }
+    if (!toast) {
+        console.error('Toast element not found!');
+        return;
+    }
 
-    const options = {
-        root: null,
-        threshold: 0.3
-    };
+    // 添加点击事件
+    launchBtn.addEventListener('click', function() {
+        console.log('Button clicked');
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    });
 
+    // 页面滚动动画观察器
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
         });
-    }, options);
+    }, { threshold: 0.3 });
 
     // 观察所有页面容器
     document.querySelectorAll('.container').forEach(container => {
